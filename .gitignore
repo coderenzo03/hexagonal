@@ -1,0 +1,3 @@
+# Project exclude paths
+/hexagonal/src/main/resources/static/admin/
+/hexagonal/src/main/resources/static/usuario/
