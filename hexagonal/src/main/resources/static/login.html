@@ -3,51 +3,397 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iniciar Sesión</title>
+  <title>ICE FRÍO HIELO | Iniciar Sesión</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #f1f3f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    :root {
+      --primary-blue: #0d6efd;
+      --soft-pink: #fce4ec; /* Color base pastel de la referencia */
+      --light-blue: #e3f2fd;
+      --text-dark: #333;
+      --card-bg: #ffffff;
+      --button-primary-bg: #ff7f7f; /* Rojo suave de la referencia */
+      --button-primary-hover: #fa6a6a;
+      --main-logo-color: #e57373; /* Rojo del logo en la referencia */
+      --secondary-logo-color: #64b5f6; /* Azul del logo en la referencia */
+      --form-border-color: #e0e0e0;
+      --shadow-color: rgba(0, 0, 0, 0.08);
+      --particle-color-1: #ffd700; /* Amarillo */
+      --particle-color-2: #add8e6; /* Azul claro */
+      --particle-color-3: #ffb6c1; /* Rosa claro */
     }
-    .login-box {
-      background-color: white;
+
+    body {
+      background: linear-gradient(135deg, var(--light-blue), var(--soft-pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      overflow: hidden; /* Oculta el desbordamiento de las partículas */
+      position: relative; /* Necesario para posicionar las partículas */
+    }
+
+    /* Fondo de partículas animadas */
+    .background-particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0; /* Para que esté detrás del contenido principal */
+        pointer-events: none; /* Para que no interfiera con los clicks */
+    }
+
+    .particle {
+        position: absolute;
+        background-color: var(--particle-color-1); /* Color inicial */
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: floatAndFade 15s infinite ease-in-out;
+    }
+    .particle:nth-child(2) { background-color: var(--particle-color-2); animation-duration: 20s; animation-delay: 2s; }
+    .particle:nth-child(3) { background-color: var(--particle-color-3); animation-duration: 18s; animation-delay: 4s; }
+    .particle:nth-child(4) { background-color: var(--particle-color-1); animation-duration: 22s; animation-delay: 6s; }
+    .particle:nth-child(5) { background-color: var(--particle-color-2); animation-duration: 17s; animation-delay: 8s; }
+    .particle:nth-child(6) { background-color: var(--particle-color-3); animation-duration: 19s; animation-delay: 10s; }
+
+
+    @keyframes floatAndFade {
+        0% {
+            transform: translateY(100vh) scale(0);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(-20vh) scale(1.2);
+            opacity: 0;
+        }
+    }
+
+
+    .login-container {
+      display: flex;
+      background: var(--card-bg);
+      border-radius: 20px; /* Más redondeado */
+      box-shadow: 0 10px 30px var(--shadow-color); /* Sombra más pronunciada */
+      overflow: hidden;
+      max-width: 900px; /* Ancho máximo para el contenedor total */
+      width: 90%;
+      position: relative; /* Para z-index sobre las partículas */
+      z-index: 1;
+    }
+
+    .login-illustration {
+      flex: 1;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--soft-pink); /* Fondo del lado de la ilustración */
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    /* Estilo para el título de texto en lugar del logo */
+    .login-illustration h1 {
+        font-family: 'Pacifico', cursive; /* Fuente elegante */
+        font-size: 3.5rem; /* Tamaño grande */
+        color: var(--main-logo-color); /* Color rojo del diseño */
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra para que resalte */
+        margin-bottom: 0;
+        line-height: 1.2;
+    }
+    .login-illustration p.subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.2rem;
+        color: var(--secondary-logo-color); /* Color azul del diseño */
+        margin-top: 0.5rem;
+        font-weight: 600;
+    }
+
+
+    /* Pequeñas burbujas decorativas en la ilustración */
+    .bubble {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        opacity: 0.8;
+        filter: blur(2px);
+    }
+    .bubble:nth-child(1) { width: 50px; height: 50px; top: 10%; left: 5%; animation: bubble-anim 10s infinite ease-in-out; }
+    .bubble:nth-child(2) { width: 30px; height: 30px; top: 30%; right: 10%; animation: bubble-anim 8s infinite ease-in-out reverse; }
+    .bubble:nth-child(3) { width: 40px; height: 40px; bottom: 15%; left: 20%; animation: bubble-anim 12s infinite ease-in-out; }
+    .bubble:nth-child(4) { width: 25px; height: 25px; top: 5%; right: 25%; animation: bubble-anim 7s infinite ease-in-out; }
+    .bubble:nth-child(5) { width: 35px; height: 35px; bottom: 5%; right: 5%; animation: bubble-anim 11s infinite ease-in-out reverse; }
+
+    @keyframes bubble-anim {
+        0% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-10px) scale(1.1); }
+        100% { transform: translateY(0) scale(1); }
+    }
+
+
+    .login-form-wrapper {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 10px; /* Bordes más suaves para inputs */
+      border: 1px solid var(--form-border-color);
+      padding: 0.75rem 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .btn-primary {
+      background-color: var(--button-primary-bg); /* Nuevo color de botón */
+      border-color: var(--button-primary-bg);
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(255, 127, 127, 0.3); /* Sombra para el botón */
+    }
+    .btn-primary:hover {
+      background-color: var(--button-primary-hover);
+      border-color: var(--button-primary-hover);
+      transform: translateY(-2px); /* Pequeño efecto de levantamiento */
+      box-shadow: 0 6px 15px rgba(255, 127, 127, 0.4);
+    }
+
+    .alert-message {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+    }
+    .alert-success {
+        color: #0f5132;
+        background-color: #d1e7dd;
+        border-color: #badbcc;
+    }
+    .alert-danger {
+        color: #842029;
+        background-color: #f8d7da;
+        border-color: #f5c2c7;
+    }
+    .alert-warning {
+        color: #664d03;
+        background-color: #fff3cd;
+        border-color: #ffecb5;
+    }
+
+    /* Media Queries para responsividad */
+    @media (max-width: 768px) {
+      .login-container {
+        flex-direction: column; /* Coloca la ilustración encima del formulario */
+        width: 95%;
+        max-width: 500px;
+      }
+      .login-illustration {
+        padding: 1.5rem;
+        border-radius: 20px 20px 0 0; /* Redondea solo la parte superior */
+      }
+      .login-form-wrapper {
+        padding: 2rem;
+      }
+      .form-title {
+        font-size: 1.8rem;
+      }
+      .login-illustration h1 {
+        font-size: 2.8rem; /* Ajuste para móviles */
+      }
+      .login-illustration p.subtitle {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .login-illustration h1 {
+            font-size: 2.2rem; /* Ajuste para móviles muy pequeños */
+        }
+        .login-illustration p.subtitle {
+            font-size: 0.9rem;
+        }
+        .btn-primary {
+            font-size: 1rem;
+            padding: 0.6rem 1.2rem;
+        }
+        .login-form-wrapper {
+            padding: 1.5rem;
+        }
     }
   </style>
 </head>
 <body>
 
-<div class="login-box">
-  <h3 class="text-center mb-4">Iniciar Sesión</h3>
-  <form id="form-login">
-    <div class="mb-3">
-      <label for="correo" class="form-label">Correo</label>
-      <input type="email" id="correo" class="form-control" required />
-    </div>
-    <div class="mb-3">
-      <label for="contrasena" class="form-label">Contraseña</label>
-      <input type="password" id="contrasena" class="form-control" required />
-    </div>
-    <div class="mb-3">
-      <label for="rol" class="form-label">Rol</label>
-      <select id="rol" class="form-select" required>
-        <option value="" disabled selected>Seleccione su rol</option>
-        <option value="ADMIN">Administrador</option>
-        <option value="TRABAJADOR">Trabajador</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-  </form>
+<!-- Partículas de fondo animadas -->
+<div class="background-particles">
+  <div class="particle" style="width: 15px; height: 15px; top: 10%; left: 20%;"></div>
+  <div class="particle" style="width: 25px; height: 25px; top: 40%; right: 15%;"></div>
+  <div class="particle" style="width: 20px; height: 20px; bottom: 5%; left: 50%;"></div>
+  <div class="particle" style="width: 18px; height: 18px; top: 70%; left: 5%;"></div>
+  <div class="particle" style="width: 22px; height: 22px; bottom: 30%; right: 25%;"></div>
+  <div class="particle" style="width: 16px; height: 16px; top: 5%; left: 80%;"></div>
 </div>
 
-<script src="login.js"></script>
+<div class="login-container">
+  <!-- Sección de Ilustración (lado izquierdo) -->
+  <div class="login-illustration">
+    <!-- Título de texto bonito en lugar de la imagen -->
+    <h1>ICE FRÍO HIELO</h1>
+    <p class="subtitle">¡El sabor más refrescante para tu día!</p>
+    <!-- Burbujas decorativas en la ilustración -->
+    <div class="bubble" style="top: 10%; left: 10%;"></div>
+    <div class="bubble" style="top: 25%; right: 5%;"></div>
+    <div class="bubble" style="bottom: 5%; left: 30%;"></div>
+  </div>
+
+  <!-- Sección del Formulario (lado derecho) -->
+  <div class="login-form-wrapper">
+    <h2 class="form-title">Iniciar Sesión</h2>
+    <form id="form-login">
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="correo" required placeholder="tu.correo@dominio.com"/>
+      </div>
+      <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="contrasena" required placeholder="••••••••"/>
+      </div>
+      <div class="mb-4">
+        <label for="rol" class="form-label">Rol</label>
+        <select id="rol" class="form-select" required>
+          <option value="">Selecciona un rol</option>
+          <option value="ADMIN">Administrador</option>
+          <option value="TRABAJADOR">Trabajador</option>
+        </select>
+      </div>
+      <div id="alert-messages" class="mb-3">
+        <!-- Mensajes de alerta se insertarán aquí -->
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById("form-login").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const correo = document.getElementById("correo").value.trim();
+    const contrasena = document.getElementById("contrasena").value.trim();
+    const rol = document.getElementById("rol").value;
+    const alertMessagesDiv = document.getElementById("alert-messages");
+    alertMessagesDiv.innerHTML = ''; // Limpiar mensajes anteriores
+
+    // Validación de dominio de correo por rol
+    if (rol === "ADMIN" && !correo.endsWith("@admin.com")) {
+      mostrarAlerta("⚠️ Los administradores deben usar un correo @admin.com", "warning");
+      return;
+    }
+
+    if (rol === "TRABAJADOR" && !correo.endsWith("@empresa.com")) {
+      mostrarAlerta("⚠️ Los trabajadores deben usar un correo @empresa.com", "warning");
+      return;
+    }
+
+    // Validación si no se selecciona rol
+    if (rol === "") {
+        mostrarAlerta("Por favor, selecciona un rol.", "warning");
+        return;
+    }
+
+    fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo, contrasena, rol })
+    })
+    .then(async res => { // Cambiado a 'async' para usar await
+      if (!res.ok) {
+        let errorMessage = "Credenciales incorrectas.";
+        try {
+            const errorData = await res.json(); // Intenta leer el cuerpo como JSON
+            if (errorData && errorData.message) {
+                errorMessage = errorData.message; // Usa el mensaje del backend
+            } else if (errorData && errorData.error) { // Para errores Spring Security/otros
+                errorMessage = errorData.error;
+            }
+        } catch (jsonError) {
+            // Si no es JSON o falla al leer, el errorMessage genérico se mantiene
+            console.error("Error al parsear el JSON de error:", jsonError);
+            // Si el status es 403 y no hay JSON, es probable que sea un error de seguridad (token inválido/expirado)
+            if (res.status === 403) {
+                errorMessage = "Acceso denegado. Es posible que tu sesión haya expirado o no tengas permisos.";
+            } else if (res.status === 401) { // Manejo específico para 401 (Unauthorized)
+                 errorMessage = "Usuario o contraseña incorrectos.";
+            } else {
+                errorMessage = `Error ${res.status}: ${res.statusText || 'Desconocido'}`;
+            }
+        }
+        mostrarAlerta(`❌ Error: ${errorMessage}`, "danger");
+        throw new Error(errorMessage); // Lanza el error para detener la cadena de .then
+      }
+      return res.json();
+    })
+    .then(data => {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("rol", data.rol);
+
+      mostrarAlerta("¡Inicio de sesión exitoso! Redirigiendo...", "success");
+      setTimeout(() => { // Pequeño retardo para que el usuario vea el mensaje de éxito
+          if (data.rol === "ADMIN") {
+            window.location.href = "admin/dashboard.html";
+          } else if (data.rol === "TRABAJADOR") {
+            window.location.href = "usuario/cliente-dashboard.html";
+          } else {
+            mostrarAlerta("Rol no reconocido. Contacta al soporte.", "danger");
+          }
+      }, 1000); // Retraso de 1 segundo
+    })
+    .catch(err => {
+        // Los errores ya fueron mostrados por el .then anterior
+        console.error("Error en la cadena de fetch:", err);
+    });
+
+    function mostrarAlerta(mensaje, tipo) {
+        alertMessagesDiv.innerHTML = `<div class="alert-message alert-${tipo}" role="alert">${mensaje}</div>`;
+    }
+  });
+</script>
+
 </body>
 </html>

@@ -17,20 +17,13 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String sabor;
-
-    @Column(nullable = false)
-    private int cantidad;
-
     @Column(name = "usuario_email", nullable = false)
     private String usuarioEmail;
 
     @Column(name = "fecha_pedido", nullable = false)
     private LocalDateTime fechaPedido;
 
-    // 💡 Relación con los detalles del pedido
+    // Relación con detalles del pedido
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetallePedidoEntity> detalles;
 }
-

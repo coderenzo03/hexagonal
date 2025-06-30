@@ -20,24 +20,19 @@ public class ProductoEntity {
     private double precio;
     private int stock;
 
+    // Mapeo de dominio a entidad
     public static ProductoEntity fromModel(Producto producto) {
-        ProductoEntity entity = new ProductoEntity();
-        entity.setId(producto.getId());
-        entity.setNombre(producto.getNombre());
-        entity.setDescripcion(producto.getDescripcion());
-        entity.setPrecio(producto.getPrecio());
-        entity.setStock(producto.getStock());
-        return entity;
+        return new ProductoEntity(
+                producto.getId(),
+                producto.getNombre(),
+                producto.getDescripcion(),
+                producto.getPrecio(),
+                producto.getStock()
+        );
     }
 
-
+    // Mapeo de entidad a dominio
     public Producto toModel() {
-        return new Producto(
-                this.id,
-                this.nombre,
-                this.descripcion,
-                this.precio,
-                this.stock
-        );
+        return new Producto(id, nombre, descripcion, precio, stock);
     }
 }

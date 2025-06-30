@@ -10,7 +10,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Genera una clave segura
     private final long EXPIRACION = 86400000; // 24 horas
 
     public String generarToken(String email, String rol) {

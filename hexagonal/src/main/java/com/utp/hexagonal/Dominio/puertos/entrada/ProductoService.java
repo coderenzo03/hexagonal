@@ -12,4 +12,6 @@ public interface ProductoService {
     Producto obtenerProductoPorId(Long id);
     Producto actualizarProducto(Long id, Producto producto);
     void eliminarProducto(Long id);
+    long countAllProducts();
+    long countProductsWithStockLessThan(int threshold);
 }

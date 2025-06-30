@@ -20,8 +20,6 @@ public class PedidoRepositorioImpl implements PedidoRepositorio {
     @Override
     public Pedido guardar(Pedido pedido) {
         PedidoEntity entity = new PedidoEntity();
-        entity.setSabor(pedido.getSabor());
-        entity.setCantidad(pedido.getCantidad());
         entity.setUsuarioEmail(pedido.getUsuarioEmail());
         entity.setFechaPedido(pedido.getFechaPedido());
         PedidoEntity saved = jpaRepository.save(entity);
@@ -38,8 +36,6 @@ public class PedidoRepositorioImpl implements PedidoRepositorio {
     private Pedido toModel(PedidoEntity entity) {
         Pedido pedido = new Pedido();
         pedido.setId(entity.getId());
-        pedido.setSabor(entity.getSabor());
-        pedido.setCantidad(entity.getCantidad());
         pedido.setUsuarioEmail(entity.getUsuarioEmail());
         pedido.setFechaPedido(entity.getFechaPedido());
         return pedido;
