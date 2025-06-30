@@ -23,6 +23,10 @@
 		<jjwt.version>0.11.5</jjwt.version>
 		<openpdf.version>1.3.30</openpdf.version>
 	</properties>
+	<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 
 	<dependencies>
 		<!-- Spring Boot Starters -->
